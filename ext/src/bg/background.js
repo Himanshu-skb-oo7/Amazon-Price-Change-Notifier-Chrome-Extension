@@ -38,9 +38,9 @@ function check() {
 
                     chrome.storage.local.get(url,function (result) {
                         var obj= {};
-                        obj[url]= price
+                        obj[url]= parseFloat(price)
 
-                        if (result[url]!=price)
+                        if (result[url]!=price && price!=NaN && result[url]!=NaN)
                         {
                             chrome.storage.local.set(obj)
                             notify(title,result[url],obj[url])
