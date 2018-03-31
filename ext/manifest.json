@@ -14,11 +14,17 @@
     "page": "src/bg/background.html",
     "persistent": true
   },
-  "page_action": {
-    "default_icon": "icons/icon19.png",
-    "default_title": "page action demo",
-    "default_popup": "src/page_action/page_action.html"
+
+  "browser_action": {
+    "default_popup":"index.html"
   },
+
+    "permissions": [
+      "storage",
+      "notifications",
+      "https://www.amazon.in/*"
+    ],
+
   "content_scripts": [
     {
       "matches": [
@@ -30,11 +36,13 @@
     },
     {
       "matches": [
-        "https://www.google.com/*"
+        "https://www.amazon.in/*",
+        "file:///C:/Users/Himanshu%20Yadav/Desktop/abc.html"
       ],
       "js": [
         "src/inject/inject.js"
       ]
     }
   ]
+
 }
