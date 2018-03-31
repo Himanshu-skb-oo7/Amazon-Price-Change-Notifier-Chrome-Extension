@@ -12,7 +12,7 @@ function check() {
 
         allKeys.forEach(function(entry) {
             var url= String(entry)
-            console.log(url);
+            console.log(items[url]+" "+url);
 
                 $.get(url,function (data){
                     var htmlData=data
@@ -41,7 +41,7 @@ function check() {
                         if (result[url]!=price)
                         {
                             chrome.storage.local.set(obj)
-                            notify()
+                            notify(url,result[url],obj[url])
                         }
 
                     })
@@ -61,20 +61,15 @@ chrome.extension.onMessage.addListener(
     sendResponse();
   });
 
-function notify() {
+function notify(url,prevprice,newprice) {
 
     var options = {
         type: "basic",
-        title: "My First Notification",
-        message: "Bhai Ka Bhaukaal!",
+        title: "Price Change in Listed Product",
+        message: String(url)+' PrevPrice: '+prevprice+' NewPrice: '+newprice,
         iconUrl: 'icon166.png'
     }
 
-    $(document).ready(function(){
-        $("#btn1").click(function(){
-            $("p").append(" <b>Appended text</b>.");
-        });
-    });
 
     chrome.notifications.create(options,callback);
 
