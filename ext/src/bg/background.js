@@ -4,6 +4,7 @@ $(document).ready(function () {
         check()
         setInterval(check,20000)
     });
+
 });
 
 function check() {
@@ -12,12 +13,13 @@ function check() {
 
         allKeys.forEach(function(entry) {
             var url= String(entry)
-            console.log(items[url]+" "+url);
+          //  console.log(items[url]+" "+url);
 
                 $.get(url,function (data){
                     var htmlData=data
                     var price= parseFloat($(htmlData).find('#cerberus-data-metrics').attr('data-asin-price'))
-                    console.log(price)
+                    var title = $(htmlData).filter('title').text();
+                   // console.log(price+" "+title)
                     try{
                         var x=String($(htmlData).find('#priceblock_dealprice')[0].innerText).trim();
                         if(price>parseFloat(x))
@@ -26,12 +28,12 @@ function check() {
 
                         }
 
-                        console.log(price)
+                      //  console.log(price)
 
                     }
                     catch(e)
                     {
-                        console.log('error')
+                        //console.log('error')
                     }
 
                     chrome.storage.local.get(url,function (result) {
@@ -41,7 +43,7 @@ function check() {
                         if (result[url]!=price)
                         {
                             chrome.storage.local.set(obj)
-                            notify(url,result[url],obj[url])
+                            notify(title,result[url],obj[url])
                         }
 
                     })
@@ -74,6 +76,6 @@ function notify(url,prevprice,newprice) {
     chrome.notifications.create(options,callback);
 
     function callback() {
-        console.log('Notified!')
+      //  console.log('Notified!')
     }
 }

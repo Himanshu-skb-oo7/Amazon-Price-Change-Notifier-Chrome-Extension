@@ -10,7 +10,7 @@ chrome.extension.sendMessage({}, function(response) {
                 objj['Add']= 'false'
                 chrome.storage.local.set(objj)
 
-                console.log("--------------------")
+               // console.log("--------------------")
                 var url=String(window.location.href);
 
                 chrome.storage.local.get(url, function(result) {
@@ -29,7 +29,7 @@ chrome.extension.sendMessage({}, function(response) {
                         }
                         catch(e)
                         {
-                            console.log('error')
+                            //console.log('error')
                         }
                         var obj= {};
                         obj[url]= price
@@ -43,7 +43,7 @@ chrome.extension.sendMessage({}, function(response) {
             }
             else
             {
-                console.log("NOt -----------")
+              //  console.log("NOt -----------")
             }
 
         })
@@ -58,14 +58,14 @@ chrome.extension.sendMessage({}, function(response) {
 
                 var url=String(window.location.href);
                 chrome.storage.local.remove(url)
-                console.log('REMOVE')
+               // console.log('REMOVE')
             }
 
         })
 
 
 
-        console.log("Hello. This message was sent from scripts/inject.js");
+      //  console.log("Hello. This message was sent from scripts/inject.js");
 
 
 	}
